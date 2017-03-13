@@ -1,6 +1,8 @@
 var newTriwizard;
-var tileGraphicsLoaded = 0;
-var ctx = document.getElementById('isometricMaze').getContext('2d');
+var getIsoMaze = document.getElementById('isometricMaze');
+var ctx = getIsoMaze.getContext('2d');
+var harryx = 4;
+var harryy = 0;
 
 function Maze() {
     this.maze = [
@@ -12,8 +14,8 @@ function Maze() {
     [1,1,1,1,1,0,0,0,0,1,0,1,1,1,1,1,1,0,0,1],
     [1,0,1,0,0,0,1,0,1,1,0,1,0,0,0,0,0,0,0,1],
     [1,0,1,0,1,1,1,0,1,0,0,1,1,1,1,1,0,0,0,1],
-    [1,0,1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,1,0,1],
-    [1,0,1,0,1,0,0,4,0,0,0,0,1,0,1,1,0,1,0,1],
+    [1,0,1,0,1,0,0,0,1,1,0,0,0,0,0,1,0,1,1,1],
+    [1,0,1,0,1,0,0,4,0,0,0,0,1,1,1,1,0,1,0,1],
     [1,0,0,0,1,1,1,1,0,2,0,1,1,0,0,0,0,1,0,1],
     [1,1,1,0,0,0,0,1,0,0,0,0,1,0,1,1,1,1,0,1],
     [1,0,1,1,1,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0],
@@ -34,7 +36,7 @@ Maze.prototype._renderBoard = function () {
 
 //Preload images
 Maze.prototype._loadTiles =  function() {
-  var tileGraphicsToLoad = ["img/blank.png", "img/isohedge.png","img/trophy.png", "img/harry.png", "img/goblin.png"];
+  var tileGraphicsToLoad = ["img/dirt.png", "img/isohedge.png","img/trophy.png", "img/harry.png", "img/goblin.png"];
 
     for (var i = 0; i < tileGraphicsToLoad.length; i++) {
       this.tileGraphics[i] = document.createElement("img");
@@ -42,14 +44,15 @@ Maze.prototype._loadTiles =  function() {
     }
 };
 
-// Maze.protoype.move() {
-//     this.maze.addEventListener('keydown')
-// }
-
+function move(e) {
+    e.preventDefault();
+    if(e.keycode === 37) {
+        harryx--;
+        console.log('left');
+    }
+}
 
 Maze.prototype._drawMap = function() {
-  var harryx = 4;
-  var harryy = 0;
   var tileH = 25;
   var tileW = 50;
 
@@ -79,4 +82,6 @@ $( document ).ready(function() {
     newTriwizard._renderBoard();
     newTriwizard._loadTiles();
     newTriwizard._drawMap();
+    window.addEventListener("keydown", move, true);
+    console.log(harryy, harryx);
 });

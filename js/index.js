@@ -1,8 +1,8 @@
 var newTriwizard;
 var getIsoMaze = document.getElementById('isometricMaze');
 var ctx = getIsoMaze.getContext('2d');
-var harryx = 4;
-var harryy = 0;
+var harryx = 12;
+var harryy = 20;
 
 
 function Maze() {
@@ -19,7 +19,7 @@ function Maze() {
     [1,0,1,0,1,0,0,4,0,0,0,0,1,1,1,1,0,1,0,1],
     [1,0,0,0,1,1,1,1,0,2,0,1,1,0,0,0,0,1,0,1],
     [1,1,1,0,0,0,0,1,0,0,0,0,1,0,1,1,1,1,0,1],
-    [1,0,1,1,1,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0],
+    [1,0,1,1,1,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0],
     [1,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1],
     [1,0,0,1,1,1,0,1,0,0,0,0,0,0,1,0,0,0,0,1],
     [1,0,0,0,0,0,0,1,0,1,1,1,1,0,1,0,1,1,0,1],
@@ -28,6 +28,7 @@ function Maze() {
     [1,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,1],
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
     ];
+
     this.tileGraphics = [];
 }
 
@@ -65,59 +66,38 @@ Maze.prototype.drawMap = function() {
       }
     }
   }
+
 };
 
 Maze.prototype.moveup = function() {
-
-    for (var i = 0; i < this.maze.length; i++) {
-      for (var j = 0; j < this.maze[i].length; j++) {
-          if(harryx === i && harryy === j) {
-              if(this.maze[i - 1][j] === 0) {
-                  harryx--;
-              } else {
-                  return false;
-              }
-          }
-
+    if(this.maze[harryx - 1][harryy] === 0) {
+        harryx--;
+      } else {
+          return;
       }
-    }
 };
 
 Maze.prototype.movedown = function() {
-    for (var i = 0; i < this.maze.length; i++) {
-      for (var j = 0; j < this.maze[i].length; j++) {
-          if(this.maze[i+1][j] === 0) {
-              harryx++;
-          } else {
-              return false;
-          }
+    if(this.maze[harryx + 1][harryy] === 0) {
+      harryx++;
+      } else {
+          return;
       }
+};
+
+Maze.prototype.moveright = function() {
+    if(this.maze[harryx][harryy-1] === 0) {
+        harryy--;
+    } else {
+        return;
     }
 };
 
 Maze.prototype.moveleft = function() {
-    for (var i = 0; i < this.maze.length; i++) {
-      for (var j = 0; j < this.maze[i].length; j++) {
-          if(this.maze[i][j-1] === 0) {
-              harryy--;
-          } else {
-              return false;
-          }
-      }
-    }
-};
-
-Maze.prototype.moveright = function() {
-    for (var i = 0; i < this.maze.length; i++) {
-      for (var j = 0; j < this.maze[i].length; j++) {
-          if(harryx === i && harryy === j) {
-              if(this.maze[i][j+1] === 0) {
-                harryy ++;
-              } else {
-                return false;
-              }
-          }
-      }
+    if(this.maze[harryx][harryy+1] === 0) {
+        harryy ++;
+    } else {
+        return;
     }
 };
 
@@ -130,12 +110,13 @@ function moveListeners (event) {
     return;
 
   switch (event.keyCode) {
-    case 38: newTriwizard.moveup(); console.log(harryx,harryy); break;
-    case 40: newTriwizard.moveright(); console.log(harryx,harryy); break;
-    case 37: newTriwizard.moveleft(); console.log(harryx,harryy); break;
-    case 39: newTriwizard.movedown(); console.log(harryx,harryy); break;
+    case 38: newTriwizard.moveup(); break;
+    case 39: newTriwizard.moveright(); break;
+    case 37: newTriwizard.moveleft(); break;
+    case 40: newTriwizard.movedown(); break;
   }
-newTriwizard.drawMap();
+  ctx.clearRect(0, 0, 1500, 600);
+  newTriwizard.drawMap();
 }
 
 document.addEventListener("keydown", moveListeners);
@@ -145,5 +126,4 @@ $( document ).ready(function() {
     newTriwizard._renderBoard();
     newTriwizard._loadTiles();
     newTriwizard.drawMap();
-    console.log(harryx,harryy);
 });

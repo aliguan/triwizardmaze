@@ -1,1 +1,1 @@
-canvas{background-color:white}.clearfix:after{content:" ";visibility:hidden;display:block;height:0;clear:both}.hide{display:none}
+@font-face{font-family:Harry;src:url(../fonts/harry.TTF)}#start{background:url("../img/welcomebg.jpg") no-repeat center center fixed;width:100%;background-size:cover;font-family:Harry;color:gold}#start h1{font-size:120px;width:70%;margin:auto;text-align:center;margin-top:50px}canvas{background-color:white}.clearfix:after{content:" ";visibility:hidden;display:block;height:0;clear:both}.hide{display:none}

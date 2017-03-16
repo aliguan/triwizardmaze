@@ -1,9 +1,34 @@
+//Start CSS
+
+@font-face {
+    font-family: Harry;
+    src: url(../fonts/harry.TTF);
+}
+
+#start {
+    background: url('../img/welcomebg.jpg')no-repeat center center fixed;
+    width: 100%;
+    background-size: cover;
+    font-family: Harry;
+    color: gold;
+    h1 {
+        font-size: 120px;
+        width: 70%;
+        margin: auto;
+        text-align: center;
+        margin-top: 50px;
+
+    }
+}
+
+
+
 canvas {
     background-color: white;
 }
 
 .clearfix:after {
-   content: " "; /* Older browser do not support empty content */
+   content: " ";
    visibility: hidden;
    display: block;
    height: 0;

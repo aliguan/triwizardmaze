@@ -3,7 +3,9 @@ var getIsoMaze = document.getElementById('isometricMaze');
 var ctx = getIsoMaze.getContext('2d');
 var harryx = 12;
 var harryy = 20;
-
+var dementorx = 11;
+var dementory = 9;
+var dead;
 
 function Maze() {
     // this.maze = [
@@ -41,7 +43,7 @@ function Maze() {
     [1,0,1,0,0,0,0,4,1,1,0,0,0,0,0,1,0,1,1,1],
     [1,0,1,0,1,0,0,0,2,0,0,0,1,1,1,1,0,1,0,1],
     [1,0,0,0,1,1,1,1,0,0,0,1,1,0,0,0,0,1,0,1],
-    [1,1,1,0,0,0,0,1,0,5,0,0,1,0,1,1,1,1,0,1],
+    [1,1,1,0,0,0,0,1,0,0,0,0,1,0,1,1,1,1,0,1],
     [1,0,1,1,1,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0],
     [1,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1],
     [1,0,0,1,1,1,0,1,0,0,0,0,0,0,1,0,0,0,0,1],
@@ -86,16 +88,45 @@ Maze.prototype.drawMap = function() {
       if(harryx === i && harryy === j) {
           ctx.drawImage(this.tileGraphics[3], (i - j) * tileH + mapX, (i + j) * tileH / 2 + mapY);
       }
+      if(dementorx === i && dementory === j) {
+          ctx.drawImage(this.tileGraphics[5], (i - j) * tileH + mapX, (i + j) * tileH / 2 + mapY);
+      }
     }
   }
 
 };
 
+function dementor() {
+    var direction = Math.floor(Math.random() * 4) + 1;
+          //right
+          if(newTriwizard.maze[dementorx][dementory - 1] === 0 && direction === 1) {
+              dementory--;
+          }
+          //left
+          else if(newTriwizard.maze[dementorx][dementory + 1] === 0 && direction === 2) {
+               dementory++;
+          }
+          //up
+          else if (newTriwizard.maze[dementorx - 1][dementory] === 0 && direction === 3) {
+              dementorx--;
+          }
+          else if (newTriwizard.maze[dementorx + 1][dementory] === 0 && direction === 4) {
+              dementorx++;
+          }
+    if(dementorx === harryx && dementory == harryy) {
+        console.log('dead');
+        window.clearInterval(dead);
+        //INSERT LOSE FUNCTION
+    }
+    ctx.clearRect(0, 0, 1500, 700);
+    newTriwizard.drawMap();
+}
+
 Maze.prototype.moveup = function() {
     if(this.maze[harryx - 1][harryy] === 0) {
         harryx--;
       } else {
-          return;
+          return false;
       }
 };
 
@@ -103,7 +134,7 @@ Maze.prototype.movedown = function() {
     if(this.maze[harryx + 1][harryy] === 0) {
       harryx++;
       } else {
-          return;
+          return false;
       }
 };
 
@@ -111,7 +142,7 @@ Maze.prototype.moveright = function() {
     if(this.maze[harryx][harryy-1] === 0) {
         harryy--;
     } else {
-        return;
+        return false;
     }
 };
 
@@ -119,7 +150,7 @@ Maze.prototype.moveleft = function() {
     if(this.maze[harryx][harryy+1] === 0) {
         harryy ++;
     } else {
-        return;
+        return false;
     }
 };
 
@@ -137,16 +168,20 @@ function moveListeners (event) {
     case 37: newTriwizard.moveleft(); break;
     case 40: newTriwizard.movedown(); break;
   }
-  console.log(harryx, harryy);
+  
   ctx.clearRect(0, 0, 1500, 700);
   newTriwizard.drawMap();
 }
 
 document.addEventListener("keydown", moveListeners);
 
+
+
 $( document ).ready(function() {
     newTriwizard = new Maze();
     newTriwizard._renderBoard();
     newTriwizard._loadTiles();
     newTriwizard.drawMap();
+    dead = setInterval(dementor, 100);
+
 });

@@ -21,7 +21,65 @@
     }
 }
 
+//Lose
+#win, #lose {
+    font-family: Harry;
+    color: #ffdb19;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.7s;
+    h1 {
+        font-size: 76px;
+        margin-top: 45px;
+    }
+}
 
+.wincontent, .losecontent {
+    width: 800px;
+    margin: auto;
+    vertical-align: middle;
+    text-align: center;
+    span {
+        font-size: 18px;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+    .btn {
+        font-size: 18px;
+        height: 45px;
+        font-family: sans-serif;
+        background-color: #006497;
+        margin-top: 20px;
+        a {
+            color: white;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+    }
+    p {
+        font-size: 18px;
+        font-family: sans-serif;
+    }
+}
+
+.wincontent {
+    img {
+        margin-bottom: 20px;
+    }
+}
+
+#win {
+    h1 {
+        font-size: 128px;
+    }
+}
 
 canvas {
     background-color: white;

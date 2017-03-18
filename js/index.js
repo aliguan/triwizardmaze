@@ -38,9 +38,9 @@ function Maze() {
     [1,1,1,0,1,0,0,1,0,1,1,1,1,1,0,1,0,1,0,1],
     [0,0,0,0,1,0,1,1,0,1,0,0,0,0,0,0,0,0,0,1],
     [1,1,1,1,1,0,0,0,0,1,0,1,1,1,1,1,1,0,0,1],
-    [1,0,1,0,0,0,1,0,1,1,0,1,0,0,0,0,0,0,0,1],
+    [1,0,1,0,0,0,1,0,1,1,0,1,0,0,0,0,0,4,0,1],
     [1,0,1,0,1,1,1,0,1,0,0,1,1,1,1,1,0,0,0,1],
-    [1,0,1,0,0,0,0,4,1,1,0,0,0,0,0,1,0,1,1,1],
+    [1,0,1,0,0,0,0,0,1,1,0,0,0,0,0,1,0,1,1,1],
     [1,0,1,0,1,0,0,0,2,0,0,0,1,1,1,1,0,1,0,1],
     [1,0,0,0,1,1,1,1,0,0,0,1,1,0,0,0,0,1,0,1],
     [1,1,1,0,0,0,0,1,0,0,0,0,1,0,1,1,1,1,0,1],
@@ -57,9 +57,9 @@ function Maze() {
     this.tileGraphics = [];
 }
 
-Maze.prototype._renderBoard = function () {
-  this.maze.forEach(function(row){ console.log(row); });
-};
+// Maze.prototype._renderBoard = function () {
+//   this.maze.forEach(function(row){ console.log(row); });
+// };
 
 //Preload images
 Maze.prototype._loadTiles =  function() {
@@ -96,6 +96,60 @@ Maze.prototype.drawMap = function() {
 
 };
 
+
+Maze.prototype.moveup = function() {
+    if(this.maze[harryx - 1][harryy] === 0 || this.maze[harryx - 1][harryy] === 2) {
+        harryx--;
+      } else {
+          return false;
+      }
+};
+
+Maze.prototype.movedown = function() {
+    if(this.maze[harryx + 1][harryy] === 0 || this.maze[harryx + 1][harryy] === 2) {
+      harryx++;
+      } else {
+          return false;
+      }
+};
+
+Maze.prototype.moveright = function() {
+    if(this.maze[harryx][harryy-1] === 0 || this.maze[harryx][harryy-1] === 2) {
+        harryy--;
+    } else {
+        return false;
+    }
+};
+
+Maze.prototype.moveleft = function() {
+    if(this.maze[harryx][harryy+1] === 0 || this.maze[harryx][harryy+1] === 2) {
+        harryy ++;
+    } else {
+        return false;
+    }
+};
+
+function moveListeners (event) {
+  event.preventDefault();
+  var keys = [37, 38, 39, 40];
+
+  if (keys.indexOf(event.keyCode) < 0)
+    return;
+
+  switch (event.keyCode) {
+    case 38: newTriwizard.moveup(); break;
+    case 39: newTriwizard.moveright(); break;
+    case 37: newTriwizard.moveleft(); break;
+    case 40: newTriwizard.movedown(); break;
+  }
+  ctx.clearRect(0, 0, 1500, 700);
+  newTriwizard.drawMap();
+  win();
+}
+
+document.addEventListener("keydown", moveListeners);
+
+
 function dementor() {
     var direction = Math.floor(Math.random() * 4) + 1;
           //right
@@ -116,70 +170,23 @@ function dementor() {
     if(dementorx === harryx && dementory == harryy) {
         console.log('dead');
         window.clearInterval(dead);
-        //INSERT LOSE FUNCTION
+        document.getElementById("lose").style.width = "100%";
     }
     ctx.clearRect(0, 0, 1500, 700);
     newTriwizard.drawMap();
 }
 
-Maze.prototype.moveup = function() {
-    if(this.maze[harryx - 1][harryy] === 0) {
-        harryx--;
-      } else {
-          return false;
-      }
-};
-
-Maze.prototype.movedown = function() {
-    if(this.maze[harryx + 1][harryy] === 0) {
-      harryx++;
-      } else {
-          return false;
-      }
-};
-
-Maze.prototype.moveright = function() {
-    if(this.maze[harryx][harryy-1] === 0) {
-        harryy--;
-    } else {
-        return false;
+function win() {
+    if(newTriwizard.maze[harryx][harryy] === 2) {
+        console.log('win');
+        document.getElementById("win").style.width = "100%";
     }
-};
-
-Maze.prototype.moveleft = function() {
-    if(this.maze[harryx][harryy+1] === 0) {
-        harryy ++;
-    } else {
-        return false;
-    }
-};
-
-
-function moveListeners (event) {
-  event.preventDefault();
-  var keys = [37, 38, 39, 40];
-
-  if (keys.indexOf(event.keyCode) < 0)
-    return;
-
-  switch (event.keyCode) {
-    case 38: newTriwizard.moveup(); break;
-    case 39: newTriwizard.moveright(); break;
-    case 37: newTriwizard.moveleft(); break;
-    case 40: newTriwizard.movedown(); break;
-  }
-  
-  ctx.clearRect(0, 0, 1500, 700);
-  newTriwizard.drawMap();
 }
-
-document.addEventListener("keydown", moveListeners);
-
 
 
 $( document ).ready(function() {
     newTriwizard = new Maze();
-    newTriwizard._renderBoard();
+    // newTriwizard._renderBoard();
     newTriwizard._loadTiles();
     newTriwizard.drawMap();
     dead = setInterval(dementor, 100);

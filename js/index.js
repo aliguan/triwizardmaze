@@ -6,6 +6,10 @@ var harryy = 20;
 var dementorx = 11;
 var dementory = 9;
 var dead;
+var tileH = 28;
+var tileW = 50;
+var mapX = 700;
+var mapY = 70;
 
 function Maze() {
     // this.maze = [
@@ -71,11 +75,8 @@ Maze.prototype._loadTiles =  function() {
 };
 
 Maze.prototype.drawMap = function() {
-  var tileH = 28;
-  var tileW = 50;
 
-  var mapX = 700;
-  var mapY = 70;
+
   var drawTile;
   //Loop through 2D Array
 
@@ -93,7 +94,7 @@ Maze.prototype.drawMap = function() {
       }
     }
   }
-
+  spotlight();
 };
 
 
@@ -181,6 +182,30 @@ function win() {
         console.log('win');
         document.getElementById("win").style.width = "100%";
     }
+}
+
+
+function spotlight() {
+
+    var maskCanvas = document.createElement('canvas');
+    // Ensure same dimensions
+    maskCanvas.width = getIsoMaze.width;
+    maskCanvas.height = getIsoMaze.height;
+    var maskCtx = maskCanvas.getContext('2d');
+
+   // This color is the one of the filled shape
+    maskCtx.fillStyle = "black";
+    // Fill the mask
+    maskCtx.fillRect(0, 0, maskCanvas.width, maskCanvas.height);
+    // Set xor operation
+    maskCtx.globalCompositeOperation = 'xor';
+    // Draw the shape you want to take out
+
+    maskCtx.arc((harryx - harryy) * (tileH - 2) + mapX,(harryx + harryy) * (tileH + 1.5) / 2 + mapY, 75, 0, 2 * Math.PI);
+    maskCtx.fill();
+
+    // Draw mask on the image, and done !
+    ctx.drawImage(maskCanvas, 0, 0);
 }
 
 

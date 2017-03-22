@@ -94,7 +94,7 @@ Maze.prototype.drawMap = function() {
       }
     }
   }
-  spotlight();
+  // spotlight();
 };
 
 
@@ -177,6 +177,7 @@ function dementor() {
     newTriwizard.drawMap();
 }
 
+
 function win() {
     if(newTriwizard.maze[harryx][harryy] === 2) {
         console.log('win');
@@ -184,29 +185,56 @@ function win() {
     }
 }
 
+var cutout;
+var maskCtx;
+var maskCanvas;
+var radius = 75;
+var clicked = false;
 
 function spotlight() {
-
-    var maskCanvas = document.createElement('canvas');
+    maskCanvas = document.createElement('canvas');
     // Ensure same dimensions
     maskCanvas.width = getIsoMaze.width;
     maskCanvas.height = getIsoMaze.height;
-    var maskCtx = maskCanvas.getContext('2d');
+    maskCtx = maskCanvas.getContext('2d');
 
    // This color is the one of the filled shape
-    maskCtx.fillStyle = "black";
+    maskCtx.fillStyle = "#121212";
     // Fill the mask
     maskCtx.fillRect(0, 0, maskCanvas.width, maskCanvas.height);
     // Set xor operation
     maskCtx.globalCompositeOperation = 'xor';
-    // Draw the shape you want to take out
 
-    maskCtx.arc((harryx - harryy) * (tileH - 2) + mapX,(harryx + harryy) * (tileH + 1.5) / 2 + mapY, 75, 0, 2 * Math.PI);
+    if(clicked === true) {
+        radius = 150;
+    }
+    // draw shape you wanna take out
+    cutout = maskCtx.arc((harryx - harryy) * (tileH - 2) + mapX,(harryx + harryy) * (tileH + 1.5) / 2 + mapY, radius, 0, 2 * Math.PI);
+
     maskCtx.fill();
-
     // Draw mask on the image, and done !
     ctx.drawImage(maskCanvas, 0, 0);
 }
+
+/* SHRINK SPOTLIGHT FUNCTION */
+
+// var decreaseRadius;
+// function reduceRadius() {
+//     radius = 170;
+//     decreaseRadius = setInterval(function() {
+//         radius -= 10;
+//         ctx.drawImage(maskCanvas, 0, 0);
+//         console.log(radius);
+//         if(radius === 70) {
+//             window.clearInterval(decreaseRadius);
+//         }
+//     }, 1000);
+// }
+
+document.getElementById('lumos').onclick = function() {
+   clicked = true;
+   spotlight();
+};
 
 
 $( document ).ready(function() {

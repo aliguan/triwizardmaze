@@ -10,6 +10,12 @@ var tileH = 28;
 var tileW = 50;
 var mapX = 700;
 var mapY = 70;
+var cutout;
+var maskCtx;
+var maskCanvas;
+var radius = 75;
+var clicked = false;
+var randomY;
 
 function Maze() {
     // this.maze = [
@@ -66,8 +72,8 @@ function Maze() {
 // };
 
 //Preload images
-Maze.prototype._loadTiles =  function() {
-  var tileGraphicsToLoad = ["img/dirt.png", "img/isohedge.png","img/trophy.png", "img/harry.png", "img/goblin.png","img/sphinx.png"];
+Maze.prototype._loadTiles =  function loadTiles() {
+  var tileGraphicsToLoad = ["img/dirt.png", "img/isohedge.png","img/trophy.png", "img/harry.png", "img/goblin.png","img/dementor.png"];
     for (var i = 0; i < tileGraphicsToLoad.length; i++) {
       this.tileGraphics[i] = document.createElement("img");
       this.tileGraphics[i].src = tileGraphicsToLoad[i];
@@ -75,7 +81,6 @@ Maze.prototype._loadTiles =  function() {
 };
 
 Maze.prototype.drawMap = function() {
-
 
   var drawTile;
   //Loop through 2D Array
@@ -94,35 +99,35 @@ Maze.prototype.drawMap = function() {
       }
     }
   }
-  // spotlight();
+  spotlight();
 };
 
 
-Maze.prototype.moveup = function() {
-    if(this.maze[harryx - 1][harryy] === 0 || this.maze[harryx - 1][harryy] === 2) {
+Maze.prototype.moveleft = function() {
+    if(this.maze[harryx - 1][harryy] != 1 ) {
         harryx--;
       } else {
           return false;
       }
 };
 
-Maze.prototype.movedown = function() {
-    if(this.maze[harryx + 1][harryy] === 0 || this.maze[harryx + 1][harryy] === 2) {
+Maze.prototype.moveright = function() {
+    if(this.maze[harryx + 1][harryy] != 1) {
       harryx++;
       } else {
           return false;
       }
 };
 
-Maze.prototype.moveright = function() {
-    if(this.maze[harryx][harryy-1] === 0 || this.maze[harryx][harryy-1] === 2) {
+Maze.prototype.moveup = function() {
+    if(this.maze[harryx][harryy-1] != 1) {
         harryy--;
     } else {
         return false;
     }
 };
 
-Maze.prototype.moveleft = function() {
+Maze.prototype.movedown = function() {
     if(this.maze[harryx][harryy+1] === 0 || this.maze[harryx][harryy+1] === 2) {
         harryy ++;
     } else {
@@ -145,6 +150,7 @@ function moveListeners (event) {
   }
   ctx.clearRect(0, 0, 1500, 700);
   newTriwizard.drawMap();
+  fluffy();
   win();
 }
 
@@ -185,11 +191,14 @@ function win() {
     }
 }
 
-var cutout;
-var maskCtx;
-var maskCanvas;
-var radius = 75;
-var clicked = false;
+function fluffy() {
+    if(newTriwizard.maze[harryx][harryy] === 4 ) {
+        console.log('dog');
+        document.getElementById("fluffy").style.width = "100%";
+    }
+}
+
+
 
 function spotlight() {
     maskCanvas = document.createElement('canvas');
@@ -205,43 +214,97 @@ function spotlight() {
     // Set xor operation
     maskCtx.globalCompositeOperation = 'xor';
 
-    if(clicked === true) {
-        radius = 150;
-    }
+
     // draw shape you wanna take out
     cutout = maskCtx.arc((harryx - harryy) * (tileH - 2) + mapX,(harryx + harryy) * (tileH + 1.5) / 2 + mapY, radius, 0, 2 * Math.PI);
 
     maskCtx.fill();
     // Draw mask on the image, and done !
     ctx.drawImage(maskCanvas, 0, 0);
+    shrink();
 }
 
-/* SHRINK SPOTLIGHT FUNCTION */
+function shrink() {
+    if(clicked === true) {
+        radius = 150;
+        clicked = false;
+        decreaseRadius = setInterval(function() {
+             radius -= 10;
+             if(radius === 70) {
+                window.clearInterval(decreaseRadius);
+             }
+        }, 700);
+    }
+}
 
-// var decreaseRadius;
-// function reduceRadius() {
-//     radius = 170;
-//     decreaseRadius = setInterval(function() {
-//         radius -= 10;
-//         ctx.drawImage(maskCanvas, 0, 0);
-//         console.log(radius);
-//         if(radius === 70) {
-//             window.clearInterval(decreaseRadius);
-//         }
-//     }, 1000);
-// }
 
 document.getElementById('lumos').onclick = function() {
    clicked = true;
    spotlight();
 };
 
+//FLUFFY
+
+var fluffycanvas = document.getElementById('dancefluffy');
+var fluffyctx = fluffycanvas.getContext('2d');
+var loadimgs = [];
+
+
+function loadArrows() {
+    var arrows = ['img/up.png', 'img/down.png', 'img/right.png', 'img/left.png'];
+    for (var i = 0; i < arrows.length; i++) {
+        loadimgs[i] = document.createElement('img');
+        loadimgs[i].src = arrows[i];
+    }
+}
+loadArrows();
+
+var arrowUp = {
+    x: 0,
+    y: 9999,
+};
+
+
+
+function drawArrows() {
+    fluffyctx.drawImage(loadimgs[0], 0, 100, 200, 200);
+    fluffyctx.drawImage(loadimgs[1], 275, 100, 200, 200);
+    fluffyctx.drawImage(loadimgs[2], 570, 100, 200, 200);
+    fluffyctx.drawImage(loadimgs[3], 850, 100, 200, 200);
+}
+
+randomY = Math.floor(Math.random()*(200 - 100+1)+ 100);
+console.log(randomY);
+arrowUp.y = randomY;
+function movingArrows() {
+
+    console.log(arrowUp.y);
+    if(arrowUp.y <= randomY){
+		arrowUp.y--;
+    } else {
+      arrowUp.y --;
+    }
+    fluffyctx.setTransform(1,0,0,1,arrowUp.x, arrowUp.y);
+    fluffyctx.drawImage(loadimgs[0], arrowUp.x, arrowUp.y, 200, 200);
+    if(arrowUp.x === 0 && arrowUp.y === 50) {
+        console.log('hi');
+        var randomY2 = Math.floor(Math.random()*(200 - 100+1)+ 100);
+        arrowUp.y = randomY2;
+    }
+    window.requestAnimationFrame(movingArrows);
+
+}
+
 
 $( document ).ready(function() {
+    // $.getScript("js/threedog.js");
     newTriwizard = new Maze();
-    // newTriwizard._renderBoard();
     newTriwizard._loadTiles();
+
+    // newTriwizard._renderBoard();
     newTriwizard.drawMap();
     dead = setInterval(dementor, 100);
+    drawArrows();
+    movingArrows();
 
 });

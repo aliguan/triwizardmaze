@@ -1,12 +1,17 @@
 //Start CSS
 $font: Harry;
 $gold: #ffdb19;
-
+body {
+    overflow-y: hidden;
+}
 @font-face {
     font-family: Harry;
     src: url(../fonts/harry.TTF);
 }
 
+#isometricMaze {
+    // border: 10px solid #121212;
+}
 
 #start {
     background: url('../img/welcomebg.jpg')no-repeat center center fixed;
@@ -24,9 +29,10 @@ $gold: #ffdb19;
     }
 }
 
-#maze {
+#maze, #fluffy {
     position: relative;
     z-index: 4;
+    height: 100%;
 }
 
 canvas {
@@ -36,11 +42,12 @@ canvas {
 
 
 //Lose
-#win, #lose {
+// #win, #lose,
+#fluffy {
     font-family: $font;
     color: $gold;
-    height: 100%;
-    width: 0;
+    // height: 100%;
+    width: 100%;
     position: fixed;
     z-index: 999;
     left: 0;
@@ -83,6 +90,8 @@ canvas {
     }
 }
 
+
+
 #lumos {
     top: 50px;
     left: 100px;
@@ -122,16 +131,4 @@ button:hover {
     h1 {
         font-size: 128px;
     }
-}
-
-.clearfix:after {
-   content: " ";
-   visibility: hidden;
-   display: block;
-   height: 0;
-   clear: both;
-}
-
-.hide {
-    display: none;
 }

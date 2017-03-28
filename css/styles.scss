@@ -43,11 +43,12 @@ canvas {
 
 //Lose
 // #win, #lose,
-#fluffy {
+// #fluffy,
+ #sphinx {
     font-family: $font;
     color: $gold;
     // height: 100%;
-    width: 100%;
+    width: 0;
     position: fixed;
     z-index: 999;
     left: 0;

@@ -1,8 +1,10 @@
 var newTriwizard;
 var getIsoMaze = document.getElementById('isometricMaze');
 var ctx = getIsoMaze.getContext('2d');
-var harryx = 12;
-var harryy = 20;
+// var harryx = 12;
+// var harryy = 20;
+var harryx = 7;
+var harryy = 18;
 var dementorx = 11;
 var dementory = 9;
 var dead;
@@ -50,7 +52,7 @@ function Maze() {
     [1,1,1,1,1,0,0,0,0,1,0,1,1,1,1,1,1,0,0,1],
     [1,0,1,0,0,0,1,0,1,1,0,1,0,0,0,0,0,4,0,1],
     [1,0,1,0,1,1,1,0,1,0,0,1,1,1,1,1,0,0,0,1],
-    [1,0,1,0,0,0,0,0,1,1,0,0,0,0,0,1,0,1,1,1],
+    [1,0,1,0,0,0,0,6,1,1,0,0,0,0,0,1,0,1,1,1],
     [1,0,1,0,1,0,0,0,2,0,0,0,1,1,1,1,0,1,0,1],
     [1,0,0,0,1,1,1,1,0,0,0,1,1,0,0,0,0,1,0,1],
     [1,1,1,0,0,0,0,1,0,0,0,0,1,0,1,1,1,1,0,1],
@@ -73,7 +75,7 @@ function Maze() {
 
 //Preload images
 Maze.prototype._loadTiles =  function loadTiles() {
-  var tileGraphicsToLoad = ["img/dirt.png", "img/isohedge.png","img/trophy.png", "img/harry.png", "img/goblin.png","img/dementor.png"];
+  var tileGraphicsToLoad = ["img/dirt.png", "img/isohedge.png","img/trophy.png", "img/harry.png", "img/goblin.png","img/dementor.png", "img/sphinx.png"];
     for (var i = 0; i < tileGraphicsToLoad.length; i++) {
       this.tileGraphics[i] = document.createElement("img");
       this.tileGraphics[i].src = tileGraphicsToLoad[i];
@@ -99,7 +101,7 @@ Maze.prototype.drawMap = function() {
       }
     }
   }
-  spotlight();
+  // spotlight();
 };
 
 
@@ -160,27 +162,28 @@ document.addEventListener("keydown", moveListeners);
 function dementor() {
     var direction = Math.floor(Math.random() * 4) + 1;
           //right
-          if(newTriwizard.maze[dementorx][dementory - 1] === 0 && direction === 1) {
+          if(newTriwizard.maze[dementorx][dementory - 1] != 1 && direction === 1) {
               dementory--;
           }
           //left
-          else if(newTriwizard.maze[dementorx][dementory + 1] === 0 && direction === 2) {
+          else if(newTriwizard.maze[dementorx][dementory + 1] != 1 && direction === 2) {
                dementory++;
           }
           //up
-          else if (newTriwizard.maze[dementorx - 1][dementory] === 0 && direction === 3) {
+          else if (newTriwizard.maze[dementorx - 1][dementory] != 1 && direction === 3) {
               dementorx--;
           }
-          else if (newTriwizard.maze[dementorx + 1][dementory] === 0 && direction === 4) {
+          else if (newTriwizard.maze[dementorx + 1][dementory] != 1 && direction === 4) {
               dementorx++;
           }
-    if(dementorx === harryx && dementory == harryy) {
+    if(dementorx === harryx && dementory === harryy) {
         console.log('dead');
         window.clearInterval(dead);
         document.getElementById("lose").style.width = "100%";
     }
     ctx.clearRect(0, 0, 1500, 700);
     newTriwizard.drawMap();
+
 }
 
 
@@ -195,6 +198,14 @@ function fluffy() {
     if(newTriwizard.maze[harryx][harryy] === 4 ) {
         console.log('dog');
         document.getElementById("fluffy").style.width = "100%";
+        movingArrows();
+    }
+}
+
+function fluffy() {
+    if(newTriwizard.maze[harryx][harryy] === 6 ) {
+        console.log('sphinx');
+        document.getElementById("sphinx").style.width = "100%";
     }
 }
 
@@ -245,66 +256,71 @@ document.getElementById('lumos').onclick = function() {
 
 //FLUFFY
 
-var fluffycanvas = document.getElementById('dancefluffy');
-var fluffyctx = fluffycanvas.getContext('2d');
-var loadimgs = [];
-
-
-function loadArrows() {
-    var arrows = ['img/up.png', 'img/down.png', 'img/right.png', 'img/left.png'];
-    for (var i = 0; i < arrows.length; i++) {
-        loadimgs[i] = document.createElement('img');
-        loadimgs[i].src = arrows[i];
-    }
-}
-loadArrows();
-
-var arrowUp = {
-    x: 0,
-    y: 9999,
-};
-
-
-
-function drawArrows() {
-    fluffyctx.drawImage(loadimgs[0], 0, 100, 200, 200);
-    fluffyctx.drawImage(loadimgs[1], 275, 100, 200, 200);
-    fluffyctx.drawImage(loadimgs[2], 570, 100, 200, 200);
-    fluffyctx.drawImage(loadimgs[3], 850, 100, 200, 200);
-}
-
-randomY = Math.floor(Math.random()*(200 - 100+1)+ 100);
-console.log(randomY);
-arrowUp.y = randomY;
-function movingArrows() {
-
-    console.log(arrowUp.y);
-    if(arrowUp.y <= randomY){
-		arrowUp.y--;
-    } else {
-      arrowUp.y --;
-    }
-    fluffyctx.setTransform(1,0,0,1,arrowUp.x, arrowUp.y);
-    fluffyctx.drawImage(loadimgs[0], arrowUp.x, arrowUp.y, 200, 200);
-    if(arrowUp.x === 0 && arrowUp.y === 50) {
-        console.log('hi');
-        var randomY2 = Math.floor(Math.random()*(200 - 100+1)+ 100);
-        arrowUp.y = randomY2;
-    }
-    window.requestAnimationFrame(movingArrows);
-
-}
+// var fluffycanvas = document.getElementById('dancefluffy');
+// var fluffyctx = fluffycanvas.getContext('2d');
+// var loadimgs = [];
+// var speed;
+// var distance;
+// var randomNums;
+// var arrowUp;
+//
+// function loadArrows() {
+//     var arrows = ['img/up.png', 'img/down.png', 'img/right.png', 'img/left.png'];
+//     for (var i = 0; i < arrows.length; i++) {
+//         loadimgs[i] = document.createElement('img');
+//         loadimgs[i].src = arrows[i];
+//     }
+// }
+// loadArrows();
+//
+// //Generate random distance and speed of Arrow to move in Fluffy game
+// randomNums = setInterval(function() {
+//     speed = Math.floor(Math.random()*(10 - 1 + 1 ) + 1);
+//     distance = Math.floor(Math.random()*(600 - 300+1)+ 300);
+// for(i = 0; i < 50; i ++) {
+//     if (distance - (speed * i) === 50) {
+//         console.log(speed, distance);
+//         console.log('divisible');
+//         arrowUp = {
+//             x: 0,
+//             y: distance,
+//         };
+//         window.clearInterval(randomNums);
+//         console.log(arrowUp.y);
+//         console.log(i);
+//         }
+//     }
+// }, 50);
+//
+// function drawArrows() {
+//     fluffyctx.drawImage(loadimgs[0], 0, 100, 200, 200);
+//     fluffyctx.drawImage(loadimgs[1], 275, 100, 200, 200);
+//     fluffyctx.drawImage(loadimgs[2], 570, 100, 200, 200);
+//     fluffyctx.drawImage(loadimgs[3], 850, 100, 200, 200);
+// }
+//
+//
+// function movingArrows() {
+//     console.log(arrowUp.y);
+//     arrowUp.y -= speed;
+//     fluffyctx.setTransform(1,0,0,1,arrowUp.x, arrowUp.y);
+//     fluffyctx.drawImage(loadimgs[0], arrowUp.x, arrowUp.y, 200, 200);
+//     if(arrowUp.x === 0 && arrowUp.y === 50) {
+//         console.log('hi');
+//         return;
+//     }
+//     window.requestAnimationFrame(movingArrows);
+//
+// }
 
 
 $( document ).ready(function() {
     // $.getScript("js/threedog.js");
     newTriwizard = new Maze();
     newTriwizard._loadTiles();
-
     // newTriwizard._renderBoard();
     newTriwizard.drawMap();
     dead = setInterval(dementor, 100);
-    drawArrows();
-    movingArrows();
+
 
 });

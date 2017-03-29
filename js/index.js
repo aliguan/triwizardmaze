@@ -9,8 +9,8 @@ function DementorPerson() {
     this.x = dementorPosx;
     this.y = dementorPosy;
 }
-var dementorPosx;
-var dementorPosy;
+var dementorPosx = 11;
+var dementorPosy = 9;
 var dead;
 var tileH = 28;
 var tileW = 50;
@@ -23,16 +23,17 @@ var radius = 75;
 var clicked = false;
 var randomY;
 
+dementor = new DementorPerson();
 
-function createDementor() {
-
-    for (i = 0; i < 20; i++) {
-        dementorPosx = Math.floor(Math.random() * 19) + 1;
-        dementorPosxy = Math.floor(Math.random() * 19) + 1;
-        dementor = new DementorPerson();
-    }
-}
-
+// function createDementor() {
+//
+//     for (i = 0; i < 20; i++) {
+//         dementorPosx = Math.floor(Math.random() * 19) + 1;
+//         dementorPosxy = Math.floor(Math.random() * 19) + 1;
+//         dementor = new DementorPerson();
+//     }
+// }
+//
 
 function Maze() {
     // this.maze = [

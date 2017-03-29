@@ -59,5 +59,4 @@ function movingArrows() {
 
 $( document ).ready(function() {
     drawArrows();
-
 });

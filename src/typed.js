@@ -290,59 +290,21 @@
 				// else{
 				//  self.stopNum = 0;
 				// }
+				curStrPos = 0;
 
-				if (self.contentType === 'html') {
-					// skip over html tags while backspacing
-					if (curString.substr(curStrPos).charAt(0) === '>') {
-						var tag = '';
-						while (curString.substr(curStrPos - 1).charAt(0) !== '<') {
-							tag -= curString.substr(curStrPos).charAt(0);
-							curStrPos--;
-							if (curStrPos < 0) { break; }
-						}
-						curStrPos--;
-						tag += '<';
-					}
-				}
+				        if (curStrPos <= self.stopNum) {
+				            self.arrayPos++;
 
-				// ----- continue important stuff ----- //
-				// replace text with base text + typed characters
-				var nextString = curString.substr(0, curStrPos);
-				if (self.attr) {
-					self.el.setAttribute(self.attr, nextString);
-				} else {
-					if (self.isInput) {
-						self.el.value = nextString;
-					} else if (self.contentType === 'html') {
-						self.el.innerHTML = nextString;
-					} else {
-						self.el.textContent = nextString;
-					}
-				}
+				            if (self.arrayPos === self.strings.length) {
+				                self.arrayPos = 0;
 
-				// if the number (id of character in current string) is
-				// less than the stop number, keep going
-				if (curStrPos > self.stopNum) {
-					// subtract characters one by one
-					curStrPos--;
-					// loop the function
-					self.backspace(curString, curStrPos);
-				}
-				// if the stop number has been reached, increase
-				// array position to next string
-				else if (curStrPos <= self.stopNum) {
-					self.arrayPos++;
-
-					if (self.arrayPos === self.strings.length) {
-						self.arrayPos = 0;
-
-						// Shuffle sequence again
-						if(self.shuffle) self.sequence = self.shuffleArray(self.sequence);
-
-						self.init();
-					} else
-						self.typewrite(self.strings[self.sequence[self.arrayPos]], curStrPos);
-				}
+				                // // Shuffle sequence again
+				                // if(self.shuffle) self.sequence = self.shuffleArray(self.sequence);
+                                //
+				                // self.init();
+				            } else
+				                self.typewrite(self.strings[self.sequence[self.arrayPos]], curStrPos);
+				        }
 
 				// humanized value for typing
 			}, humanize);

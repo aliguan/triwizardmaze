@@ -5,8 +5,12 @@ var ctx = getIsoMaze.getContext('2d');
 // var harryy = 20;
 var harryx = 7;
 var harryy = 18;
-var dementorx = 11;
-var dementory = 9;
+function DementorPerson() {
+    this.x = dementorPosx;
+    this.y = dementorPosy;
+}
+var dementorPosx;
+var dementorPosy;
 var dead;
 var tileH = 28;
 var tileW = 50;
@@ -18,6 +22,17 @@ var maskCanvas;
 var radius = 75;
 var clicked = false;
 var randomY;
+
+
+function createDementor() {
+
+    for (i = 0; i < 20; i++) {
+        dementorPosx = Math.floor(Math.random() * 19) + 1;
+        dementorPosxy = Math.floor(Math.random() * 19) + 1;
+        dementor = new DementorPerson();
+    }
+}
+
 
 function Maze() {
     // this.maze = [
@@ -96,7 +111,7 @@ Maze.prototype.drawMap = function() {
       if(harryx === i && harryy === j) {
           ctx.drawImage(this.tileGraphics[3], (i - j) * tileH + mapX, (i + j) * tileH / 2 + mapY);
       }
-      if(dementorx === i && dementory === j) {
+      if(dementor.x === i && dementor.y === j) {
           ctx.drawImage(this.tileGraphics[5], (i - j) * tileH + mapX, (i + j) * tileH / 2 + mapY);
       }
     }
@@ -160,24 +175,24 @@ function moveListeners (event) {
 document.addEventListener("keydown", moveListeners);
 
 
-function dementor() {
+function moveDementor() {
     var direction = Math.floor(Math.random() * 4) + 1;
           //right
-          if(newTriwizard.maze[dementorx][dementory - 1] != 1 && direction === 1) {
-              dementory--;
+          if(newTriwizard.maze[dementor.x][dementor.y - 1] != 1 && direction === 1) {
+              dementor.y--;
           }
           //left
-          else if(newTriwizard.maze[dementorx][dementory + 1] != 1 && direction === 2) {
-               dementory++;
+          else if(newTriwizard.maze[dementor.x][dementor.y + 1] != 1 && direction === 2) {
+               dementor.y++;
           }
           //up
-          else if (newTriwizard.maze[dementorx - 1][dementory] != 1 && direction === 3) {
-              dementorx--;
+          else if (newTriwizard.maze[dementor.x - 1][dementor.y] != 1 && direction === 3) {
+              dementor.x--;
           }
-          else if (newTriwizard.maze[dementorx + 1][dementory] != 1 && direction === 4) {
-              dementorx++;
+          else if (newTriwizard.maze[dementor.x + 1][dementor.y] != 1 && direction === 4) {
+              dementor.x++;
           }
-    if(dementorx === harryx && dementory === harryy) {
+    if(dementor.x === harryx && dementor.y === harryy) {
         console.log('dead');
         window.clearInterval(dead);
         document.getElementById("lose").style.width = "100%";
@@ -186,6 +201,8 @@ function dementor() {
     newTriwizard.drawMap();
 
 }
+
+
 
 
 function win() {
@@ -258,7 +275,7 @@ $( document ).ready(function() {
     newTriwizard._loadTiles();
     // newTriwizard._renderBoard();
     newTriwizard.drawMap();
-    dead = setInterval(dementor, 100);
+    dead = setInterval(moveDementor, 100);
     $(document).keydown(function(e) {
         if(e === 75) {
             e.preventDefault();

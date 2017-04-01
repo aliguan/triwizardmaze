@@ -1,16 +1,20 @@
 var newTriwizard;
 var getIsoMaze = document.getElementById('isometricMaze');
 var ctx = getIsoMaze.getContext('2d');
-// var harryx = 12;
-// var harryy = 20;
-var harryx = 7;
-var harryy = 18;
-function DementorPerson() {
+var harryx = 12;
+var harryy = 20;
+// var harryx = 7;
+// var harryy = 18;
+function DementorPerson(dementorPosx, dementorPosy) {
     this.x = dementorPosx;
     this.y = dementorPosy;
 }
-var dementorPosx = 11;
-var dementorPosy = 9;
+var dementor =  {
+    x: 11,
+    y: 9,
+};
+var dementorPosx;
+var dementorPosy;
 var dead;
 var tileH = 28;
 var tileW = 50;
@@ -22,18 +26,18 @@ var maskCanvas;
 var radius = 75;
 var clicked = false;
 var randomY;
+var dementors = [];
+var lives = 3;
 
-dementor = new DementorPerson();
 
 // function createDementor() {
-//
-//     for (i = 0; i < 20; i++) {
+//     for (i = 0; i < 5; i++) {
 //         dementorPosx = Math.floor(Math.random() * 19) + 1;
-//         dementorPosxy = Math.floor(Math.random() * 19) + 1;
-//         dementor = new DementorPerson();
+//         dementorPosy = Math.floor(Math.random() * 19) + 1;
+//         dementors[i] = new DementorPerson(dementorPosx, dementorPosy);
 //     }
 // }
-//
+// setTimeout(createDementor,  5000);
 
 function Maze() {
     // this.maze = [
@@ -112,12 +116,17 @@ Maze.prototype.drawMap = function() {
       if(harryx === i && harryy === j) {
           ctx.drawImage(this.tileGraphics[3], (i - j) * tileH + mapX, (i + j) * tileH / 2 + mapY);
       }
-      if(dementor.x === i && dementor.y === j) {
-          ctx.drawImage(this.tileGraphics[5], (i - j) * tileH + mapX, (i + j) * tileH / 2 + mapY);
+      if(dementor.x === i && dementor.y === j ) {
+           ctx.drawImage(this.tileGraphics[5], (i - j) * tileH + mapX, (i + j) * tileH / 2 + mapY);
+       }
+      for(k = 0; k < dementors.length; k++) {
+          if(dementors[k].x === i && dementors[k].y === j && this.maze[i][j] != 1 && dementors[k].x != harryx && dementors[k].y != harryy ) {
+              ctx.drawImage(this.tileGraphics[5], (i - j) * tileH + mapX, (i + j) * tileH / 2 + mapY);
+          }
       }
     }
   }
-  // spotlight();
+  spotlight();
 };
 
 
@@ -177,39 +186,77 @@ document.addEventListener("keydown", moveListeners);
 
 
 function moveDementor() {
+    for(i = 0; i < dementors.length; i ++) {
     var direction = Math.floor(Math.random() * 4) + 1;
           //right
-          if(newTriwizard.maze[dementor.x][dementor.y - 1] != 1 && direction === 1) {
-              dementor.y--;
+
+          if(newTriwizard.maze[dementors[i].x][dementors[i].y - 1] != 1 && direction === 1) {
+              dementors[i].y--;
           }
           //left
-          else if(newTriwizard.maze[dementor.x][dementor.y + 1] != 1 && direction === 2) {
-               dementor.y++;
+          else if(newTriwizard.maze[dementors[i].x][dementors[i].y + 1] != 1 && direction === 2) {
+               dementors[i].y++;
           }
           //up
-          else if (newTriwizard.maze[dementor.x - 1][dementor.y] != 1 && direction === 3) {
-              dementor.x--;
+          else if (newTriwizard.maze[dementors[i].x - 1][dementors[i].y] != 1 && direction === 3) {
+              dementors[i].x--;
           }
-          else if (newTriwizard.maze[dementor.x + 1][dementor.y] != 1 && direction === 4) {
-              dementor.x++;
+          else if (newTriwizard.maze[dementors[i].x + 1][dementors[i].y] != 1 && direction === 4) {
+              dementors[i].x++;
           }
-    if(dementor.x === harryx && dementor.y === harryy) {
-        console.log('dead');
-        window.clearInterval(dead);
-        document.getElementById("lose").style.width = "100%";
+
+          if(dementors[i].x === harryx && dementors[i].y === harryy) {
+             lose();
+          }
     }
     ctx.clearRect(0, 0, 1500, 700);
     newTriwizard.drawMap();
-
 }
 
+function moveHardCodedDementor() {
+    var direction = Math.floor(Math.random() * 4) + 1;
 
+    if(newTriwizard.maze[dementor.x][dementor.y - 1] != 1 && direction === 1) {
+        dementor.y --;
+    }
+    else if (newTriwizard.maze[dementor.x][dementor.y + 1] != 1 && direction === 2)
+    {
+        dementor.y++;
+    }
+    else if (newTriwizard.maze[dementor.x - 1][dementor.y] != 1 && direction === 3) {
+        dementor.x--;
+    }
+    else if (newTriwizard.maze[dementor.x + 1][dementor.y] != 1 && direction === 4) {
+        dementor.x ++;
+    }
 
+if(dementor.x === harryx && dementor.y === harryy) {
+    lose();
+}
+    ctx.clearRect(0, 0, 1500, 700);
+    newTriwizard.drawMap();
+}
 
 function win() {
     if(newTriwizard.maze[harryx][harryy] === 2) {
         console.log('win');
         document.getElementById("win").style.width = "100%";
+    }
+}
+
+function lose () {
+    lives--;
+    if(lives === 2) {
+        document.getElementById('heart1').style.display = "none";
+    }
+    else if(lives === 1) {
+        document.getElementById('heart2').style.display = "none";
+    }
+    else if (lives === 0) {
+      document.getElementById('heart3').style.display = "none";
+      document.getElementById('lose').style.width = "100%";
+      window.clearInterval(dead);
+      window.clearInterval(deadagain);
     }
 }
 
@@ -262,11 +309,28 @@ function shrink() {
     }
 }
 
+var width = 10;
 
-document.getElementById('lumos').onclick = function() {
-   clicked = true;
-   spotlight();
-};
+lumosInterval = setInterval(lumos, 1000);
+
+function lumos() {
+    // document.getElementById('lighten').addClass('disable');
+        document.getElementById('lighten').style.width = width + '%';
+        width += 10;
+        if(document.getElementById('lighten').style.width === "100%") {
+            document.getElementById('lumos').className += "hvr-pulse";
+            document.getElementById('lighten').onclick = function() {
+               clicked = true;
+               document.getElementById('lumos').className -= "hvr-pulse";
+               spotlight();
+               width = 10;
+               document.getElementById('lighten').style.width = width + '%';
+               lumosInterval = setInterval(lumos, 2000);
+           };
+            window.clearInterval(lumosInterval);
+       }
+}
+
 
 
 
@@ -277,11 +341,5 @@ $( document ).ready(function() {
     // newTriwizard._renderBoard();
     newTriwizard.drawMap();
     dead = setInterval(moveDementor, 100);
-    $(document).keydown(function(e) {
-        if(e === 75) {
-            e.preventDefault();
-            $('#win, #lose, #fluffy, #sphinx').style.width = 0;
-            console.log('esc');
-        }
-    });
+    deadagain = setInterval(moveHardCodedDementor, 100);
 });

@@ -33,6 +33,21 @@ body {
     position: relative;
     z-index: 4;
     height: 100%;
+    h1, h2 {
+        top: 30px;
+        left: calc(100%/3);
+        position: absolute;
+        width: 500px;
+        font-family: $font;
+        color: $gold;
+        font-size: 88px;
+    }
+    h2 {
+        top: 120px;
+        left: 120px;
+        font-size: 48px;
+        color: steelblue;
+    }
 }
 
 canvas {
@@ -104,33 +119,48 @@ canvas {
 
 
 #lumos {
-    top: 50px;
+    top: 250px;
     left: 100px;
     position: absolute;
     width: 100px;
-    color: $gold;
+    color: rgba(0,0,0, 0.9);
     font-family: $font;
     border: 4px solid #ffdb19;
     font-size: 32px;
 }
 
-#lumos:hover {
-    color: #121212;
+#lighten {
+    background-color: $gold!important;
+    width: 0%;
+    border: none;
+    transition: 2s;
 }
 
-button {
-
-    background-color: transparent!important;
+#lives {
+    top: 130px;
+    left: 75%;
+    position: absolute;
+    width: 300px;
+    img {
+        width: 35px;
+    }
+    span {
+        font-family: $font;
+        color: steelblue;
+        font-size: 48px;
+    }
 }
+
+
 
 button:focus {
     outline: 0;
 }
-button:hover {
-    background-color: $gold!important;
-    transition: 0.6s;
-    border: 4px solid #121212;
-}
+// button:hover {
+//     background-color: $gold!important;
+//     transition: 0.6s;
+//     border: 4px solid #121212;
+// }
 
 .wincontent {
     img {
@@ -191,4 +221,40 @@ button:hover {
 
 input[type="text"] {
     height: 48px;
+}
+
+.disable {
+    pointer-events: none;
+}
+
+@-webkit-keyframes hvr-pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+@keyframes hvr-pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+.hvr-pulse {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  animation-name: hvr-pulse;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }

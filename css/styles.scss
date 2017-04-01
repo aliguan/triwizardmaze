@@ -118,22 +118,39 @@ canvas {
 }
 
 
-#lumos {
+#lumos, #expecto {
     top: 250px;
     left: 100px;
     position: absolute;
-    width: 100px;
+    width: 150px;
     color: rgba(0,0,0, 0.9);
     font-family: $font;
     border: 4px solid #ffdb19;
-    font-size: 32px;
+    font-size: 25px;
+    height: 45px;
 }
 
-#lighten {
+#lumos:hover, #expecto:hover {
+    box-shadow: 0px 0px 40px white;
+}
+
+#lighten, #shield {
     background-color: $gold!important;
     width: 0%;
     border: none;
     transition: 2s;
+}
+
+#expecto {
+    top: 320px;
+    left: 100px;
+    border: 4px solid steelblue;
+    height: 83px;
+    font-size: 27px;
+}
+
+#shield {
+    background-color: steelblue!important;
 }
 
 #lives {
@@ -150,6 +167,7 @@ canvas {
         font-size: 48px;
     }
 }
+
 
 
 
@@ -229,8 +247,8 @@ input[type="text"] {
 
 @-webkit-keyframes hvr-pulse {
   25% {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
   }
   75% {
     -webkit-transform: scale(0.9);
@@ -239,8 +257,8 @@ input[type="text"] {
 }
 @keyframes hvr-pulse {
   25% {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
   }
   75% {
     -webkit-transform: scale(0.9);
@@ -254,7 +272,7 @@ input[type="text"] {
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px transparent;
   animation-name: hvr-pulse;
-  animation-duration: 1s;
+  animation-duration: 0.8s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }

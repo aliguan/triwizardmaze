@@ -1,5 +1,5 @@
-var width = 90;
-var expectowidth = 90;
+var width = 0;
+var expectowidth = 0;
 var callPatronus = false;
 var keypress = false;
 
@@ -27,10 +27,10 @@ function lumos() {
             document.getElementById('lumos').className += " hvr-pulse";
             document.getElementById('lighten').addEventListener('click', domLumos);
             window.addEventListener('keydown', function(e) {
-               if(e.keyCode === 76) {
+               if(e.keyCode === 76 && document.getElementById('lighten').style.width === "100%") {
                    domLumos();
                    keypress = false;
-                   
+                   e.preventDefault();
                }
            });
             window.clearInterval(lumosInterval);
@@ -51,14 +51,31 @@ function expecto() {
                patronus();
                document.getElementById('expecto').className -= "hvr-pulse";
                document.getElementById('shield').className += " disable";
-               expectowidth = 10;
+               expectowidth = 0;
                document.getElementById('shield').style.width = expectowidth + '%';
                expectoInterval = setInterval(expecto, 500);
+
            };
+           window.addEventListener('keydown', function(e) {
+              if(e.keyCode === 32 && document.getElementById('shield').style.width === "100%") {
+                  callPatronus = true;
+                  patronus();
+                  document.getElementById('expecto').className -= "hvr-pulse";
+                  document.getElementById('shield').className += " disable";
+                  expectowidth = 0;
+                  document.getElementById('shield').style.width = expectowidth + '%';
+                  expectoInterval = setInterval(expecto, 500);
+                  keypress = false;
+                  e.preventDefault();
+              }
+          });
             window.clearInterval(expectoInterval);
        }
 }
 
+function domExpecto() {
+
+}
 function patronus() {
     if(callPatronus === true) {
         newTriwizard.drawMap();

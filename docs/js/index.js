@@ -68,7 +68,7 @@ function Maze() {
     [1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,1],
     [1,0,1,0,1,1,1,1,0,0,0,0,0,1,0,1,0,1,1,1],
     [1,1,1,0,1,0,0,1,0,1,1,1,1,1,0,1,0,1,0,1],
-    [0,0,0,0,1,0,1,1,0,1,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,1,0,1,1,0,1,0,0,0,0,0,0,0,0,0,1],
     [1,1,1,1,1,0,0,0,0,1,0,1,1,1,1,1,1,0,0,1],
     [1,0,1,0,0,0,1,0,1,1,0,1,0,0,0,0,0,4,0,1],
     [1,0,1,0,1,1,1,0,1,0,0,1,1,1,1,1,0,0,0,1],
@@ -233,9 +233,9 @@ function moveHardCodedDementor() {
         dementor.x ++;
     }
 
-if(dementor.x === harryx && dementor.y === harryy) {
-    lose();
-}
+    if(dementor.x === harryx && dementor.y === harryy) {
+        lose();
+    }
     ctx.clearRect(0, 0, 1500, 700);
     newTriwizard.drawMap();
 }
@@ -325,6 +325,6 @@ $( document ).ready(function() {
     newTriwizard._loadTiles();
     // newTriwizard._renderBoard();
     newTriwizard.drawMap();
-    dead = setInterval(moveDementor, 100);
+    dead = setInterval(moveDementor, 300);
     deadagain = setInterval(moveHardCodedDementor, 100);
 });

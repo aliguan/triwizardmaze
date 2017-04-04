@@ -209,7 +209,7 @@ function moveDementor() {
           }
 
           if(dementors[i].x === harryx && dementors[i].y === harryy) {
-             lose();
+            //  lose();
           }
     }
     ctx.clearRect(0, 0, 1500, 700);
@@ -234,7 +234,7 @@ function moveHardCodedDementor() {
     }
 
     if(dementor.x === harryx && dementor.y === harryy) {
-        lose();
+        // lose();
     }
     ctx.clearRect(0, 0, 1500, 700);
     newTriwizard.drawMap();

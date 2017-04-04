@@ -303,6 +303,7 @@ button:focus {
 }
 .clue {
     margin-top: -100px;
+    z-index: 1000;
 }
 
 .typed-cursor{
@@ -333,11 +334,15 @@ button:focus {
     border: none;
     background-color: transparent;
     font-size: 48px;
-    z-index: 999;
+    z-index: 99999;
+    position: fixed;
 }
 
 input[type="text"] {
-    height: 48px;
+    height: 100px;
+    width: 100%;
+    z-index: 99999;
+
 }
 
 .disable {

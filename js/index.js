@@ -1,10 +1,10 @@
 var newTriwizard;
 var getIsoMaze = document.getElementById('isometricMaze');
 var ctx = getIsoMaze.getContext('2d');
-var harryx = 12;
-var harryy = 20;
-// var harryx = 7;
-// var harryy = 18;
+// var harryx = 12;
+// var harryy = 20;
+var harryx = 8;
+var harryy = 7;
 function DementorPerson(dementorPosx, dementorPosy) {
     this.x = dementorPosx;
     this.y = dementorPosy;
@@ -181,7 +181,7 @@ function moveListeners (event) {
   ctx.clearRect(0, 0, 1500, 700);
   newTriwizard.drawMap();
   // fluffy();
-  // sphinx();
+  sphinx();
   win();
 }
 
@@ -310,7 +310,7 @@ function spotlight() {
 
 function shrink() {
     if(clicked === true) {
-        radius = 120;
+        radius = 170;
         clicked = false;
         decreaseRadius = setInterval(function() {
              radius -= 10;

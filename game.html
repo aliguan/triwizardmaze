@@ -12,7 +12,7 @@
       crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="src/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
     <title>Harry Potter | Triwizard Tournament</title>
 </head>
 <body>
@@ -21,7 +21,7 @@
 
         <canvas id="isometricMaze"  width="1500" height="800">
         </canvas>
-    <h1> Triwizard Maze </h1>
+    <h1 style="color: #e8fdff;"> Triwizard Maze </h1>
     <h2>Spells</h2>
     <div id="lumos">
         <button id="lighten">
@@ -86,20 +86,20 @@
             <h1>The Dementor sucked out your soul. </h1>
             <h1>Guess Voldemort is going to take over after all </h1>
             <img src="img/lose.gif"><br>
-            <button class="btn btn-primary"><span class="glyphicon glyphicon-repeat"></span><a href="game.html"> Try Again</a></button>
+            <button class="btn "><span class="glyphicon glyphicon-repeat"></span><a href="game.html"> Try Again</a></button>
         </div>
     </div>
 
     <div id="win">
         <div class="wincontent">
-            <h1>You Win! </h1>
+            <h1 style="font-size: 120px!important;">You Win! </h1>
             <!-- <img src="img/win.gif"><br>
             <p>(Except not really, because we all know that the trophy is a portkey to send you to a cemetery so He Who Must Not Be Names can kill you and Cedric Diggory so You Know Who can take over the world as we know it.) </p><br>
             <a href="game.html"><button class="btn btn-primary"> Play Again</button></a> -->
             <video playsinline unmuted id="bgvid">
                 <source src="img/win.mp4" type="video/mp4">
             </video>
-            <button class="btn btn-primary"><span class="glyphicon glyphicon-repeat"></span><a href="game.html"> Play Again</a></button>
+            <button class="btn"><span class="glyphicon glyphicon-repeat"></span><a href="game.html"> Play Again</a></button>
         </div>
     </div>
 

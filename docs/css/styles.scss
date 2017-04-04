@@ -1,6 +1,6 @@
 //Start CSS
 $font: Harry;
-$gold: #ffdb19;
+$gold: #FFD700;
 body {
     overflow-y: hidden;
 }
@@ -18,17 +18,108 @@ body {
     width: 100%;
     background-size: cover;
     font-family: Harry;
-    color: gold;
+    color: #e8fdff;
     h1 {
-        font-size: 120px;
-        width: 70%;
-        margin: auto;
+        font-size: 96px;
         text-align: center;
-        margin-top: 50px;
-
+        margin-top: 60px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        margin: auto;
     }
+    overflow-x: hidden;
 }
 
+
+.buttons {
+    margin: auto;
+    button {
+        padding: 8px 15px;
+        font-size: 36px;
+        background-color: transparent;
+        color: white;
+        border-radius: 5px;
+        border: none;
+        margin-bottom: 20px;
+        font-family:  'Amatic SC', cursive;
+        font-weight: bold;
+        margin-top: 50px;
+    }
+    margin-top: 50px;
+}
+.center {
+    margin-left: 60px;
+}
+@-webkit-keyframes hvr-hang {
+  0% {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+  }
+  50% {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+  100% {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+  }
+}
+
+.hvr-hang {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  animation-name: hvr-hang;
+  animation-duration: 2s;
+  animation-delay: .3s;
+  animation-timing-function: ease-out, ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-direction: normal, alternate;
+}
+
+.hvr-forward {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-forward:hover, .hvr-forward:focus, .hvr-forward:active {
+  -webkit-transform: translateX(8px);
+  transform: translateX(8px);
+}
+
+.instructions {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 40px;
+    margin-top: 30px;
+    font-size: 36px;
+    font-family: 'Amatic SC', cursive;
+    border: 5px solid $gold;
+    p {
+        line-height: 34px;
+        margin-bottom: 30px;
+        letter-spacing: 2px;
+        padding: 0 10px;
+    }
+    h2 {
+        font-family: $font;
+        font-size: 56px;
+        text-align: center;
+    }
+    img {
+        width: 25px;
+        margin: 0 5px;
+    }
+}
+//MAIN GAME
 #maze, #fluffy {
     position: relative;
     z-index: 4;
@@ -46,7 +137,7 @@ body {
         top: 120px;
         left: 120px;
         font-size: 48px;
-        color: steelblue;
+        color: navajowhite;
     }
 }
 
@@ -57,17 +148,18 @@ canvas {
 
 
 //Lose
-#win, #lose, #fluffy, #sphinx {
+#fluffy, #sphinx, #win, #lose
+ {
     font-family: $font;
     color: $gold;
     height: 100%;
-    width: 0;
+    width: 0%;
     position: fixed;
     z-index: 999;
     left: 0;
     top: 0;
     background-color: rgba(0,0,0, 0.9);
-    overflow-x: hidden;
+    overflow: hidden;
     transition: 0.7s;
     h1 {
         font-size: 76px;
@@ -76,20 +168,23 @@ canvas {
 }
 
 .wincontent, .losecontent, {
-    width: 800px;
+    width: 700px;
     margin: auto;
     vertical-align: middle;
     text-align: center;
+    h1 {
+        font-size: 64px!important;
+    }
     span {
         font-size: 18px;
         margin-right: 5px;
         vertical-align: middle;
     }
     .btn {
-        font-size: 18px;
+        font-size: 48px;
         height: 45px;
-        font-family: sans-serif;
-        background-color: #006497;
+        font-family: "Amatic SC";
+        background-color: transparent;
         margin-top: 20px;
         a {
             color: white;
@@ -117,6 +212,10 @@ canvas {
     left: 0;
 }
 
+.spells {
+    background-color: rgba(255, 255, 255, 0.2);
+
+}
 
 #lumos, #expecto {
     top: 250px;
@@ -125,7 +224,7 @@ canvas {
     width: 150px;
     color: rgba(0,0,0, 0.9);
     font-family: $font;
-    border: 4px solid #ffdb19;
+    border: 4px solid #e8fdff;
     font-size: 25px;
     height: 45px;
 }
@@ -135,7 +234,7 @@ canvas {
 }
 
 #lighten, #shield {
-    background-color: $gold!important;
+    background-color: #e8fdff!important;
     width: 0%;
     border: none;
     transition: 2s;
@@ -144,13 +243,13 @@ canvas {
 #expecto {
     top: 320px;
     left: 100px;
-    border: 4px solid steelblue;
+    border: 4px solid navajowhite;
     height: 83px;
-    font-size: 27px;
+    font-size: 26px;
 }
 
 #shield {
-    background-color: steelblue!important;
+    background-color: navajowhite!important;
 }
 
 #lives {
@@ -163,7 +262,7 @@ canvas {
     }
     span {
         font-family: $font;
-        color: steelblue;
+        color: navajowhite;
         font-size: 48px;
     }
 }
@@ -275,4 +374,21 @@ input[type="text"] {
   animation-duration: 0.8s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+}
+
+
+video#bgvid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover;
 }

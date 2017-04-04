@@ -137,7 +137,7 @@ body {
         top: 120px;
         left: 120px;
         font-size: 48px;
-        color: steelblue;
+        color: navajowhite;
     }
 }
 
@@ -148,11 +148,12 @@ canvas {
 
 
 //Lose
-#win, #lose, #fluffy, #sphinx {
+#fluffy, #sphinx, #win, #lose
+ {
     font-family: $font;
     color: $gold;
     height: 100%;
-    width: 0;
+    width: 0%;
     position: fixed;
     z-index: 999;
     left: 0;
@@ -167,20 +168,23 @@ canvas {
 }
 
 .wincontent, .losecontent, {
-    width: 800px;
+    width: 700px;
     margin: auto;
     vertical-align: middle;
     text-align: center;
+    h1 {
+        font-size: 64px!important;
+    }
     span {
         font-size: 18px;
         margin-right: 5px;
         vertical-align: middle;
     }
     .btn {
-        font-size: 18px;
+        font-size: 48px;
         height: 45px;
-        font-family: sans-serif;
-        background-color: #006497;
+        font-family: "Amatic SC";
+        background-color: transparent;
         margin-top: 20px;
         a {
             color: white;
@@ -208,6 +212,10 @@ canvas {
     left: 0;
 }
 
+.spells {
+    background-color: rgba(255, 255, 255, 0.2);
+
+}
 
 #lumos, #expecto {
     top: 250px;
@@ -216,7 +224,7 @@ canvas {
     width: 150px;
     color: rgba(0,0,0, 0.9);
     font-family: $font;
-    border: 4px solid #ffdb19;
+    border: 4px solid #e8fdff;
     font-size: 25px;
     height: 45px;
 }
@@ -226,7 +234,7 @@ canvas {
 }
 
 #lighten, #shield {
-    background-color: $gold!important;
+    background-color: #e8fdff!important;
     width: 0%;
     border: none;
     transition: 2s;
@@ -235,13 +243,13 @@ canvas {
 #expecto {
     top: 320px;
     left: 100px;
-    border: 4px solid steelblue;
+    border: 4px solid navajowhite;
     height: 83px;
-    font-size: 27px;
+    font-size: 26px;
 }
 
 #shield {
-    background-color: steelblue!important;
+    background-color: navajowhite!important;
 }
 
 #lives {
@@ -254,7 +262,7 @@ canvas {
     }
     span {
         font-family: $font;
-        color: steelblue;
+        color: navajowhite;
         font-size: 48px;
     }
 }
@@ -382,6 +390,5 @@ video#bgvid {
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
-    background: url(polina.jpg) no-repeat;
     background-size: cover;
 }

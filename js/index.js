@@ -244,9 +244,14 @@ function win() {
     if(newTriwizard.maze[harryx][harryy] === 2) {
         console.log('win');
         document.getElementById("win").style.width = "100%";
+        playVid();
     }
 }
 
+function playVid() {
+    var video = document.getElementById('bgvid');
+    video.play();
+}
 function lose () {
     if(callPatronus === true) {
         return;

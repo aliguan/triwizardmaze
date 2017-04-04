@@ -1,10 +1,8 @@
 var newTriwizard;
 var getIsoMaze = document.getElementById('isometricMaze');
 var ctx = getIsoMaze.getContext('2d');
-// var harryx = 12;
-// var harryy = 20;
-var harryx = 8;
-var harryy = 7;
+var harryx = 12;
+var harryy = 20;
 function DementorPerson(dementorPosx, dementorPosy) {
     this.x = dementorPosx;
     this.y = dementorPosy;
@@ -31,7 +29,7 @@ var lives = 3;
 
 
 function createDementor() {
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < 8; i++) {
         dementorPosx = Math.floor(Math.random() * 19) + 1;
         dementorPosy = Math.floor(Math.random() * 19) + 1;
         dementors[i] = new DementorPerson(dementorPosx, dementorPosy);
@@ -209,7 +207,7 @@ function moveDementor() {
           }
 
           if(dementors[i].x === harryx && dementors[i].y === harryy) {
-             lose();
+            //  lose();
           }
     }
     ctx.clearRect(0, 0, 1500, 700);

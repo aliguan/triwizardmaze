@@ -1,6 +1,6 @@
 //Start CSS
 $font: Harry;
-$gold: #ffdb19;
+$gold: #FFD700;
 body {
     overflow-y: hidden;
 }
@@ -18,17 +18,108 @@ body {
     width: 100%;
     background-size: cover;
     font-family: Harry;
-    color: gold;
+    color: #e8fdff;
     h1 {
-        font-size: 120px;
-        width: 70%;
-        margin: auto;
+        font-size: 96px;
         text-align: center;
-        margin-top: 50px;
-
+        margin-top: 60px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        margin: auto;
     }
+    overflow-x: hidden;
 }
 
+
+.buttons {
+    margin: auto;
+    button {
+        padding: 8px 15px;
+        font-size: 36px;
+        background-color: transparent;
+        color: white;
+        border-radius: 5px;
+        border: none;
+        margin-bottom: 20px;
+        font-family:  'Amatic SC', cursive;
+        font-weight: bold;
+        margin-top: 50px;
+    }
+    margin-top: 50px;
+}
+.center {
+    margin-left: 60px;
+}
+@-webkit-keyframes hvr-hang {
+  0% {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+  }
+  50% {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+  100% {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+  }
+}
+
+.hvr-hang {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  animation-name: hvr-hang;
+  animation-duration: 2s;
+  animation-delay: .3s;
+  animation-timing-function: ease-out, ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-direction: normal, alternate;
+}
+
+.hvr-forward {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-forward:hover, .hvr-forward:focus, .hvr-forward:active {
+  -webkit-transform: translateX(8px);
+  transform: translateX(8px);
+}
+
+.instructions {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 40px;
+    margin-top: 30px;
+    font-size: 36px;
+    font-family: 'Amatic SC', cursive;
+    border: 5px solid $gold;
+    p {
+        line-height: 34px;
+        margin-bottom: 30px;
+        letter-spacing: 2px;
+        padding: 0 10px;
+    }
+    h2 {
+        font-family: $font;
+        font-size: 56px;
+        text-align: center;
+    }
+    img {
+        width: 25px;
+        margin: 0 5px;
+    }
+}
+//MAIN GAME
 #maze, #fluffy {
     position: relative;
     z-index: 4;

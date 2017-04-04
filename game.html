@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/styles.min.css">
+    <link rel="stylesheet" href="src/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="src/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <title>Harry Potter | Triwizard Tournament</title>
+</head>
+<body>
+
+    <div id="maze">
+
+        <canvas id="isometricMaze"  width="1500" height="800">
+        </canvas>
+    <h1> Triwizard Maze </h1>
+    <h2>Spells</h2>
+    <div id="lumos">
+        <button id="lighten">
+            Lumos!
+        </button>
+    </div>
+
+    <div id="expecto">
+
+        <button id="shield">
+            Expecto Patronum!
+        </button>
+    </div>
+
+
+
+    <div id="lives">
+        <span>Lives: </span><span><img id="heart1" src="img/heart.png"></span>
+        <span><img id="heart2" src="img/heart.png"></span>
+        <span><img id="heart3" src="img/heart.png"></span>
+
+    </div>
+    </div>
+    <div id="fluffy">
+        <div class="fluffycontent row">
+            <div class="col-md-4"></div>
+            <div class="col-md-8"><canvas width="1500px" height="900px" id="dancefluffy"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="sphinx">
+        <div class="sphinxcontent">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="sphinxpicture">
+                        <img src="img/sphinxhtml.png">
+                    </div>
+                </div>
+                <div class="riddlecontainer col-md-8">
+                    <div class="riddle">
+
+                    </div>
+                    <div class="clue">
+                        <p class="clues">First think of the person who lives in disguise, <br>Who deals in secrets and tells naught but lies.</p>
+                        <p class="clues">Next, tell me what's always the last thing to mend,<br>The middle of the middle and the end of the end?</p>
+                        <p class="clues">And finally give me the sound often heard, <br>During the search for a hard-to-find word.</p>
+                        <p class="clues">
+                            Now string them together, and answer me this, <br>Which creature would you be unwilling to kiss?
+                        </p>
+                        <input value="_" type="text" class="answer typed-cursor" name="answer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="lose">
+        <div class="losecontent">
+            <h1>The Dementor sucked out your soul. </h1>
+            <h1>Guess Voldemort is going to take over after all </h1>
+            <img src="img/lose.gif"><br>
+            <button class="btn btn-primary"><span class="glyphicon glyphicon-repeat"></span><a href="game.html"> Try Again</a></button>
+        </div>
+    </div>
+
+    <div id="win">
+        <div class="wincontent">
+            <h1>You Win! </h1>
+            <img src="img/win.gif"><br>
+            <p>(Except not really, because we all know that the trophy is a portkey to send you to a cemetery so He Who Must Not Be Names can kill you and Cedric Diggory so You Know Who can take over the world as we know it.) </p><br>
+            <a href="game.html"><button class="btn btn-primary"> Play Again</button></a>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+    <script type="text/javascript" src="js/fluffy.js"></script>
+    <script type="text/javascript" src="js/sphinx.js"></script>
+    <script src="src/typed.js"></script>
+    <script type="text/javascript" src="js/spells.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+
+</body>
+</html>

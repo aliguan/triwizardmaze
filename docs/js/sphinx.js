@@ -4,7 +4,6 @@ function sphinx() {
         document.getElementById("sphinx").style.width = "100%";
         $('.sphinxpicture').css('position','fixed');
         typeRiddle();
-
     }
 }
 
@@ -24,6 +23,11 @@ function typeRiddle() {
             },
 
         });
+        window.addEventListener('keydown', function(e) {
+           if(e.keyCode === 27) {
+               document.getElementById("sphinx").style.width = "0%";
+           }
+       });
     }
 
 $( document ).ready(function() {

@@ -179,7 +179,7 @@ function moveListeners (event) {
   ctx.clearRect(0, 0, 1500, 700);
   newTriwizard.drawMap();
   // fluffy();
-  sphinx();
+  // sphinx();
   win();
 }
 
